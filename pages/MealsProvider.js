@@ -9,9 +9,20 @@ const todaysMeals = [
 const MealsProvider = ({ children }) => {
   const [meals, setMeals] = useState(todaysMeals);
 
-  const tickMeal = (id) => {};
+  const tickMeal = (id) => {
+    const updateMeals = meals.map((meal)=>{
+      if(meal.id ===id){
+        return {...meal, isChecked : !meal.isChecked}
+      }
+      return meal;
+    })
+    setMeals(updateMeals);
+  };
 
-  return <div></div>;
+  return 
+  <MealContext.Provider value={{meals, tickMeal}}>
+        {children}
+  </MealContext.Provider>
 };
 
 export default MealsProvider;
